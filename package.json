@@ -1,7 +1,7 @@
 {
     "name": "jsonpath-selection",
-    "displayName": "JSONPath Selection",
-    "description": "Use JSONPath to select parts of your json document.",
+    "displayName": "JSONPath Extract",
+    "description": "Use JSONPath to extract parts of your json document.",
     "version": "0.0.1",
     "publisher": "davidmarek",
     "engines": {
@@ -9,6 +9,9 @@
     },
     "categories": [
         "Other"
+    ],
+    "keywords": [
+        "json", "jsonpath"
     ],
     "activationEvents": [
         "onCommand:extension.jsonpath"
