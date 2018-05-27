@@ -30,7 +30,7 @@ export default class JsonPathExtension {
     }).then(input => this.jsonPathEntered(input, jsonObject));
   }
 
-  jsonPathEntered(input : string | undefined, jsonObject : object) {
+  private jsonPathEntered(input : string | undefined, jsonObject : object) {
     if (input === undefined) { 
       console.error("jsonpath input is undefined");
       return;
@@ -47,18 +47,33 @@ export default class JsonPathExtension {
       return;
     }
 
-    const createJson = true;
-    let content : string;
-    if (createJson) {
-      content = JSON.stringify(queryResult);
-    } else {
-      content = _.join(_.map(queryResult, JSON.stringify), '\n');
-    }
-
+    const content = this.generateContent(queryResult);
     this.showContent(content);
   }
 
-  getJsonObject(editor : vscode.TextEditor) : object | undefined {
+  private generateContent(queryResult: any[]) : string {
+    const createJson = vscode.workspace.getConfiguration("jsonpath-extract").get<boolean>("createJson");
+    let content: string;
+    if (createJson) {
+      content = JSON.stringify(queryResult);
+    } else {
+      content = _.join(_.map(queryResult, this.convertResultToString), '\n');
+    }
+
+    return content;
+  }
+
+  private convertResultToString(result : any) : string {
+    if (typeof result === "string") {
+      return result;
+    } else if (typeof result === "number") {
+      return result.toString();
+    } else {
+      return JSON.stringify(result);
+    }
+  }
+
+  private getJsonObject(editor : vscode.TextEditor) : object | undefined {
     const text = editor.document.getText();
     try {
       const jsonObject = JSON.parse(text);
@@ -69,7 +84,7 @@ export default class JsonPathExtension {
     }
   }
 
-  checkJsonPath(jsonPath : string) : boolean {
+  private checkJsonPath(jsonPath : string) : boolean {
     try {
       const parsedPath = jp.parse(jsonPath);
       return parsedPath !== undefined && parsedPath.length > 0;
@@ -79,8 +94,8 @@ export default class JsonPathExtension {
     }
   }
 
-  showContent(content : string) {
-    vscode.workspace.openTextDocument({ content })
+  private showContent(content : string) {
+    vscode.workspace.openTextDocument({ content, language: 'json' })
       .then(vscode.window.showTextDocument);
   }
 }

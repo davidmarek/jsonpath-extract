@@ -1,5 +1,5 @@
 {
-    "name": "jsonpath-selection",
+    "name": "jsonpath-extract",
     "displayName": "JSONPath Extract",
     "description": "Use JSONPath to extract parts of your json document.",
     "version": "0.0.1",
@@ -21,7 +21,20 @@
         "commands": [
             {
                 "command": "extension.jsonpath",
-                "title": "JSONPath search"
+                "title": "JSONPath extract"
+            }
+        ],
+        "configuration":[
+            {
+                "type": "object",
+                "title": "JSONPath Extract configuration",
+                "properties": {
+                    "jsonpath-extract.createJson": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Extract values into a json array (instead of just pasting each value on a separate line)"
+                    }
+                }
             }
         ]
     },
