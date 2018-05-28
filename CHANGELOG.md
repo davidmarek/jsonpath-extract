@@ -5,6 +5,9 @@ All notable changes to the **JSONPath Extract** extension will be documented in 
 ### Added
 - Integration tests
 
+### Changed 
+- Commands renamed to `jsonPathExtract.queryToPlainText` and `jsonPathExtract.queryToJson`
+
 ## [0.1.0] - 2018-05-28
 ### Added
 - Initial release, supports extracting data either to a text file or a json array.
