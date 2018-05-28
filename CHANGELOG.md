@@ -1,7 +1,6 @@
 # Change Log
-All notable changes to the "jsonpath-selection" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+All notable changes to the **JSONPath Extract** extension will be documented in this file.
 
 ## [Unreleased]
-- Initial release
+### Added
+- Initial release, supports extracting data either to a text file or a json array.

@@ -4,6 +4,16 @@
     "description": "Use JSONPath to extract parts of your json document.",
     "version": "0.0.1",
     "publisher": "davidmarek",
+    "license": "SEE LICENSE IN LICENSE",
+    "homepage": "https://github.com/davidmarek/jsonpath-extract",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/davidmarek/jsonpath-extract.git"
+    },
+    "bugs":{
+        "email": "david@marek.me",
+        "url": "https://github.com/davidmarek/jsonpath-extract/issues"
+    },
     "engines": {
         "vscode": "^1.23.0"
     },
@@ -14,27 +24,21 @@
         "json", "jsonpath"
     ],
     "activationEvents": [
-        "onCommand:extension.jsonpath"
+        "onCommand:extension.jsonpathplaintext",
+        "onCommand:extension.jsonpathjson"
     ],
     "main": "./out/extension",
     "contributes": {
         "commands": [
             {
-                "command": "extension.jsonpath",
-                "title": "JSONPath extract"
-            }
-        ],
-        "configuration":[
+                "command": "extension.jsonpathplaintext",
+                "title": "Run jsonpath query - plaintext",
+                "category": "JPE"
+            },
             {
-                "type": "object",
-                "title": "JSONPath Extract configuration",
-                "properties": {
-                    "jsonpath-extract.createJson": {
-                        "type": "boolean",
-                        "default": true,
-                        "description": "Extract values into a json array (instead of just pasting each value on a separate line)"
-                    }
-                }
+                "command": "extension.jsonpathjson",
+                "title": "Run jsonpath query - json",
+                "category": "JPE"
             }
         ]
     },

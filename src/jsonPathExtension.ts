@@ -11,6 +11,12 @@ export default class JsonPathExtension {
   static EnterJsonPathPrompt = "Enter jsonpath.";
   static NoResultsFoundMsg = "No results found for provided jsonpath.";
 
+  private createJson : boolean;
+
+  constructor(pasteAsJson : boolean) {
+    this.createJson = pasteAsJson;
+  }
+
   run() {
     const editor = vscode.window.activeTextEditor;
     if (editor === undefined) {
@@ -52,9 +58,8 @@ export default class JsonPathExtension {
   }
 
   private generateContent(queryResult: any[]) : string {
-    const createJson = vscode.workspace.getConfiguration("jsonpath-extract").get<boolean>("createJson");
     let content: string;
-    if (createJson) {
+    if (this.createJson) {
       content = JSON.stringify(queryResult);
     } else {
       content = _.join(_.map(queryResult, this.convertResultToString), '\n');
@@ -95,7 +100,8 @@ export default class JsonPathExtension {
   }
 
   private showContent(content : string) {
-    vscode.workspace.openTextDocument({ content, language: 'json' })
+    const language = this.createJson ? 'json' : 'text';
+    vscode.workspace.openTextDocument({ content, language })
       .then(vscode.window.showTextDocument);
   }
 }

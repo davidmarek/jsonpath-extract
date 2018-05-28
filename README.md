@@ -1,65 +1,18 @@
-# jsonpath-selection README
+# JSONPath Extract 
 
-This is the README for your extension "jsonpath-selection". After writing up a brief description, we recommend including the following sections.
+JSONPath Extract is a Visual Studio Code extension that allows you to extract parts of a JSON document using a JSONPath query.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Currently there are two commands, both can be accessed via **Ctrl + Shift + P** (*Cmd + Alt + P* on Mac) typing **JPE**.
+To learn more about supported JSONPath syntax, check the documentation for [dchester/jsonpath](https://github.com/dchester/jsonpath) library which is used to query documents.
 
-For example if there is an image subfolder under your extension project workspace:
+![JSONPath Extract usage](/images/usage.gif)
 
-\!\[feature X\]\(images/feature-x.png\)
+### JPE: Run jsonpath query - plaintext
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+This command asks for a JSONPath query, runs it on the currently opened document and then pastes the results to a new file, each result on a separate line.
 
-## Requirements
+### JPE: Run jsonpath query - json
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+This command works just like **JPE: Run jsonpath query - plaintext**, except that results are pasted as a JSON array to a new file.
