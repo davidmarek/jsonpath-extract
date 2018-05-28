@@ -4,6 +4,7 @@ All notable changes to the **JSONPath Extract** extension will be documented in 
 ## [Unreleased]
 ### Added
 - Integration tests
+- Travis CI integration
 
 ### Changed 
 - Commands renamed to `jsonPathExtract.queryToPlainText` and `jsonPathExtract.queryToJson`
