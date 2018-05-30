@@ -1,17 +1,28 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import JsonPathExtension from './jsonPathExtension';
+import { JsonPathQueryEngine } from './jsonPathQueryEngine';
+import ResultFormatter from './resultFormatter';
+import { IVSCodeFunctions, JsonPathExtension } from './jsonPathExtension';
 
 export function activate(context: vscode.ExtensionContext) {
+    const queryEngine = new JsonPathQueryEngine();
+    const resultFormatter = new ResultFormatter();
+    const vscodeFunctions : IVSCodeFunctions = {
+        openTextDocument: vscode.workspace.openTextDocument,
+        showTextDocument: vscode.window.showTextDocument,
+        showErrorMessage: vscode.window.showErrorMessage,
+        showInformationMessage: vscode.window.showInformationMessage,
+        showInputBox: vscode.window.showInputBox
+    };
 
     const jsonPathPlainText = vscode.commands.registerCommand('jsonPathExtract.queryToPlainText', () => {
-        const jpe = new JsonPathExtension(false);
-        jpe.run();
+        const jpe = new JsonPathExtension(queryEngine, resultFormatter, false, vscodeFunctions);
+        jpe.run(vscode.window.activeTextEditor);
     });
     const jsonPathJson = vscode.commands.registerCommand('jsonPathExtract.queryToJson', () => {
-        const jpe = new JsonPathExtension(true);
-        jpe.run();
+        const jpe = new JsonPathExtension(queryEngine, resultFormatter, true, vscodeFunctions);
+        jpe.run(vscode.window.activeTextEditor);
     });
 
     context.subscriptions.push(jsonPathPlainText, jsonPathJson);
