@@ -37,7 +37,6 @@ export class JsonPathQueryEngine {
       const parsedPath = jp.parse(query);
       return parsedPath !== undefined && parsedPath.length > 0;
     } catch (e) {
-      console.error(e);
       return false;
     }
   }
