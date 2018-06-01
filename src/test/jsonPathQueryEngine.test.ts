@@ -5,13 +5,6 @@ import { JsonPathQueryEngine, ProcessQueryResultStatus } from '../jsonPathQueryE
 
 describe('JsonPathQueryEngine', function() {
   describe('#processQuery()', function() {
-    it('should return NoInput when query is undefined', function() {
-      const qe = new JsonPathQueryEngine();
-      const result = qe.processQuery(undefined, {});
-      assert.equal(result.status, ProcessQueryResultStatus.NoInput);
-      assert.isUndefined(result.result);
-    });
-
     it('should return InvalidQuery when query is invalid', function() {
       const qe = new JsonPathQueryEngine();
       const result = qe.processQuery("$[", {});

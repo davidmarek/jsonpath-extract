@@ -52,6 +52,7 @@ export class JsonPathExtension {
       prompt: JsonPathExtension.EnterJsonPathPrompt,
       ignoreFocusOut: true
     });
+    if (input === undefined) { return; }
     
     const result = this.queryEngine.processQuery(input, jsonObject);
 
@@ -61,19 +62,19 @@ export class JsonPathExtension {
     }
 
     const content = this.resultFormatter.format(result.result, this.createJson);
-    this.showContent(content);
+    await this.showContent(content);
   }
 
   private handleError(result: ProcessQueryResult) {
     switch (result.status) {
-      case ProcessQueryResultStatus.NoInput:
-        break;
       case ProcessQueryResultStatus.InvalidQuery:
         this.vscode.showErrorMessage(JsonPathExtension.InvalidJsonPathErrorMsg);
         break;
       case ProcessQueryResultStatus.NoData:
-      default:
         this.vscode.showInformationMessage(JsonPathExtension.NoResultsFoundMsg);
+        break;
+      case ProcessQueryResultStatus.Error:
+        console.error(result.result);
         break;
     }
   }
@@ -82,6 +83,11 @@ export class JsonPathExtension {
     const text = editor.document.getText();
     try {
       const jsonObject = JSON.parse(text);
+
+      if (!(jsonObject instanceof Object)) {
+        return undefined;
+      }
+
       return jsonObject;
     } catch (e) {
       return undefined;
@@ -91,6 +97,6 @@ export class JsonPathExtension {
   private async showContent(content : string) {
     const language = this.createJson ? 'json' : 'text';
     const doc = await this.vscode.openTextDocument({ content, language });
-    this.vscode.showTextDocument(doc);
+    await this.vscode.showTextDocument(doc);
   }
 }

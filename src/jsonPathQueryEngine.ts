@@ -3,9 +3,9 @@
 import * as jp from 'jsonpath';
 
 export enum ProcessQueryResultStatus {
-  NoInput,
   InvalidQuery,
   NoData,
+  Error,
   Success
 }
 
@@ -15,16 +15,18 @@ export class ProcessQueryResult {
 }
 
 export class JsonPathQueryEngine {
-  processQuery(query : string | undefined, jsonObject : any) : ProcessQueryResult {
-    if (query === undefined) { 
-      return new ProcessQueryResult(ProcessQueryResultStatus.NoInput);
-    }
-
+  processQuery(query : string, jsonObject : any) : ProcessQueryResult {
     if (!this.validateQuery(query)) {
       return new ProcessQueryResult(ProcessQueryResultStatus.InvalidQuery);
     }
 
-    const queryResult = jp.query(jsonObject, query);
+    let queryResult : any[];
+    try {
+      queryResult = jp.query(jsonObject, query);
+    } catch(e) {
+      return new ProcessQueryResult(ProcessQueryResultStatus.Error, e);
+    }
+    
     if (queryResult.length === 0) {
       return new ProcessQueryResult(ProcessQueryResultStatus.NoData);
     }
