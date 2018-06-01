@@ -2,6 +2,8 @@
 All notable changes to the **JSONPath Extract** extension will be documented in this file.
 
 ## [Unreleased]
+
+## [0.2.0] - 2018-06-02
 ### Added
 - Integration tests
 - Travis CI integration
