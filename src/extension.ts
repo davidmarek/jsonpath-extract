@@ -4,7 +4,7 @@ import * as vscode from 'vscode';
 import { JsonPathQueryEngine } from './jsonPathQueryEngine';
 import { ResultFormatter } from './resultFormatter';
 import { JsonPathExtension } from './jsonPathExtension';
-import { VSCodeFunctions } from './vscodeFunctions';
+import { VSCodeFunctions } from './vsCodeFunctions';
 
 export function activate(context: vscode.ExtensionContext) {
     const queryEngine = new JsonPathQueryEngine();
