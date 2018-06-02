@@ -9,7 +9,7 @@ import { VSCodeFunctions } from './vscodeFunctions';
 export function activate(context: vscode.ExtensionContext) {
     const queryEngine = new JsonPathQueryEngine();
     const resultFormatter = new ResultFormatter();
-    const vscodeFunctions : VSCodeFunctions = {
+    const vscodeFunctions: VSCodeFunctions = {
         openTextDocument: vscode.workspace.openTextDocument,
         showTextDocument: vscode.window.showTextDocument,
         showErrorMessage: vscode.window.showErrorMessage,

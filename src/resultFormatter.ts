@@ -3,7 +3,7 @@
 import * as _ from 'lodash';
 
 export class ResultFormatter {
-  format(results: any[], createJson : boolean) : string {
+  format(results: any[], createJson: boolean): string {
     let content: string;
     if (createJson) {
       content = JSON.stringify(results);
@@ -14,7 +14,7 @@ export class ResultFormatter {
     return content;
   }
 
-  private convertResultToString(result : any) : string {
+  private convertResultToString(result: any): string {
     if (typeof result === "string") {
       return result;
     } else if (typeof result === "number") {
