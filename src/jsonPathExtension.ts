@@ -6,11 +6,13 @@ import { ResultFormatter } from './resultFormatter';
 import { VSCodeFunctions } from './vsCodeFunctions';
 import { ProcessQueryResultStatus } from './processQueryResultStatus';
 import { ProcessQueryResult } from './processQueryResult';
+import { SavedQuery } from './savedQuery';
 
 export class JsonPathExtension {
   static NoJsonDocumentErrorMsg = 'No json document opened.';
   static InvalidJsonErrorMsg = 'Document is not valid json.';
   static InvalidJsonPathErrorMsg = 'Provided jsonpath expression is not valid.';
+  static NoSavedQueriesErrorMsg = 'No queries found in configuration.';
   static EnterJsonPathPrompt = 'Enter jsonpath.';
   static NoResultsFoundMsg = 'No results found for provided jsonpath.';
 
@@ -60,6 +62,21 @@ export class JsonPathExtension {
     await this.showContent(content);
   }
 
+  async runSavedQuery(activeTextEditor: vscode.TextEditor) {
+    if (activeTextEditor === undefined) {
+      this.vscode.showErrorMessage(JsonPathExtension.NoJsonDocumentErrorMsg);
+      return;
+    }
+
+    const savedQueries = this.getSavedQueries();
+    if (savedQueries === undefined) {
+      this.vscode.showErrorMessage(JsonPathExtension.NoSavedQueriesErrorMsg);
+      return;
+    }
+
+    const selectedQuery = await this.selectSavedQuery(savedQueries);
+  }
+
   private handleError(result: ProcessQueryResult) {
     switch (result.status) {
       case ProcessQueryResultStatus.InvalidQuery:
@@ -93,5 +110,14 @@ export class JsonPathExtension {
     const language = this.createJson ? 'json' : 'text';
     const doc = await this.vscode.openTextDocument({ content, language });
     await this.vscode.showTextDocument(doc);
+  }
+
+  private getSavedQueries(): SavedQuery[] | undefined {
+    const config = vscode.workspace.getConfiguration('jsonPathExtract').get<SavedQuery[]>('savedQueries');
+    return config;
+  }
+
+  private selectSavedQuery(queries: SavedQuery[]): SavedQuery | undefined {
+
   }
 }
