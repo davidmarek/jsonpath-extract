@@ -9,7 +9,12 @@
 			true,
 			"always"
 		],
-		"triple-equals": true
+		"triple-equals": true,
+		"quotemark": [
+			true,
+			"single",
+			"avoid-escape"
+		]
 	},
 	"defaultSeverity": "warning"
 }
