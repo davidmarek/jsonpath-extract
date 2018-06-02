@@ -31,7 +31,7 @@ describe('JsonPathExtension', function () {
       const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, false, vscodeMock.object);
       await extension.run(undefined);
 
-      vscodeMock.verify(vs => vs.showErrorMessage('No json document opened.'), TM.Times.once());
+      vscodeMock.verify(vs => vs.showErrorMessage("Active editor doesn't show a valid JSON file - please open a valid JSON file first"), TM.Times.once());
     });
 
     it('should show error if document is not valid json', async function () {
@@ -40,7 +40,7 @@ describe('JsonPathExtension', function () {
       const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, false, vscodeMock.object);
       await extension.run(editorMock.object);
 
-      vscodeMock.verify(vs => vs.showErrorMessage('Document is not valid json.'), TM.Times.once());
+      vscodeMock.verify(vs => vs.showErrorMessage("Active editor doesn't show a valid JSON file - please open a valid JSON file first"), TM.Times.once());
     });
 
     it('should show error if document is not valid json (text)', async function () {
@@ -49,7 +49,7 @@ describe('JsonPathExtension', function () {
       const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, false, vscodeMock.object);
       await extension.run(editorMock.object);
 
-      vscodeMock.verify(vs => vs.showErrorMessage('Document is not valid json.'), TM.Times.once());
+      vscodeMock.verify(vs => vs.showErrorMessage("Active editor doesn't show a valid JSON file - please open a valid JSON file first"), TM.Times.once());
     });
 
     it('should show error if document is not valid json (number)', async function () {
@@ -58,7 +58,7 @@ describe('JsonPathExtension', function () {
       const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, false, vscodeMock.object);
       await extension.run(editorMock.object);
 
-      vscodeMock.verify(vs => vs.showErrorMessage('Document is not valid json.'), TM.Times.once());
+      vscodeMock.verify(vs => vs.showErrorMessage("Active editor doesn't show a valid JSON file - please open a valid JSON file first"), TM.Times.once());
     });
 
     it('should show error if document is not valid json (string)', async function () {
@@ -67,7 +67,7 @@ describe('JsonPathExtension', function () {
       const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, false, vscodeMock.object);
       await extension.run(editorMock.object);
 
-      vscodeMock.verify(vs => vs.showErrorMessage('Document is not valid json.'), TM.Times.once());
+      vscodeMock.verify(vs => vs.showErrorMessage("Active editor doesn't show a valid JSON file - please open a valid JSON file first"), TM.Times.once());
     });
 
     it('should show error if document is not valid json (null)', async function () {
@@ -76,13 +76,14 @@ describe('JsonPathExtension', function () {
       const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, false, vscodeMock.object);
       await extension.run(editorMock.object);
 
-      vscodeMock.verify(vs => vs.showErrorMessage('Document is not valid json.'), TM.Times.once());
+      vscodeMock.verify(vs => vs.showErrorMessage("Active editor doesn't show a valid JSON file - please open a valid JSON file first"), TM.Times.once());
     });
 
     it('should show input box if document is valid json', function () {
       setupMocks({
         content: '{}',
-        query: '$'
+        query: '$',
+        queryResultStatus: ProcessQueryResultStatus.NoData
       });
 
       const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, false, vscodeMock.object);

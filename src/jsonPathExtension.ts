@@ -10,8 +10,7 @@ import { ProcessQueryResult } from './processQueryResult';
 import { SavedQuery } from './savedQuery';
 
 export class JsonPathExtension {
-  static NoJsonDocumentErrorMsg = 'No json document opened.';
-  static InvalidJsonErrorMsg = 'Document is not valid json.';
+  static NoJsonDocumentErrorMsg = "Active editor doesn't show a valid JSON file - please open a valid JSON file first";
   static InvalidJsonPathErrorMsg = 'Provided jsonpath expression is not valid.';
   static NoSavedQueriesErrorMsg = 'No queries found in configuration.';
   static EnterJsonPathPrompt = 'Enter jsonpath.';
@@ -42,7 +41,7 @@ export class JsonPathExtension {
 
     const jsonObject = this.getJsonObject(activeTextEditor);
     if (jsonObject === undefined) {
-      this.vscode.showErrorMessage(JsonPathExtension.InvalidJsonErrorMsg);
+      this.vscode.showErrorMessage(JsonPathExtension.NoJsonDocumentErrorMsg);
       return;
     }
 

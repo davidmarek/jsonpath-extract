@@ -2,10 +2,15 @@
     "name": "jsonpath-extract",
     "displayName": "JSONPath Extract",
     "description": "Use JSONPath to extract parts of your json document.",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "publisher": "davidmarek",
     "license": "SEE LICENSE IN LICENSE",
     "homepage": "https://github.com/davidmarek/jsonpath-extract",
+    "icon": "images/logo.png",
+    "galleryBanner": {
+        "color": "#025D8C",
+        "theme": "dark"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/davidmarek/jsonpath-extract.git"
