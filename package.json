@@ -6,6 +6,11 @@
     "publisher": "davidmarek",
     "license": "SEE LICENSE IN LICENSE",
     "homepage": "https://github.com/davidmarek/jsonpath-extract",
+    "icon": "images/logo.png",
+    "galleryBanner": {
+        "color": "#025D8C",
+        "theme": "dark"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/davidmarek/jsonpath-extract.git"
