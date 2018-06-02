@@ -21,12 +21,17 @@ export function activate(context: vscode.ExtensionContext) {
         const jpe = new JsonPathExtension(queryEngine, resultFormatter, false, vscodeFunctions);
         jpe.run(vscode.window.activeTextEditor);
     });
+
     const jsonPathJson = vscode.commands.registerCommand('jsonPathExtract.queryToJson', () => {
         const jpe = new JsonPathExtension(queryEngine, resultFormatter, true, vscodeFunctions);
         jpe.run(vscode.window.activeTextEditor);
     });
 
-    context.subscriptions.push(jsonPathPlainText, jsonPathJson);
+    const jsonPathSavedQueries = vscode.commands.registerCommand('jsonPathExtract.savedQuery', () => {
+        vscode.window.showQuickPick([{ label: 'A', detail: '$.a.b', description: 'Download all bs of as' }, { label: 'B', detail: '$[?(@.s == "yes")]' }], { canPickMany: false });
+    });
+
+    context.subscriptions.push(jsonPathPlainText, jsonPathJson, jsonPathSavedQueries);
 }
 
 export function deactivate() {

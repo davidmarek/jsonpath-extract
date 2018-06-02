@@ -26,7 +26,8 @@
     ],
     "activationEvents": [
         "onCommand:jsonPathExtract.queryToPlainText",
-        "onCommand:jsonPathExtract.queryToJson"
+        "onCommand:jsonPathExtract.queryToJson",
+        "onCommand:jsonPathExtract.savedQuery"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -39,6 +40,11 @@
             {
                 "command": "jsonPathExtract.queryToJson",
                 "title": "Run jsonpath query - json",
+                "category": "JPE"
+            },
+            {
+                "command": "jsonPathExtract.savedQuery",
+                "title": "Run saved jsonpath query",
                 "category": "JPE"
             }
         ]
