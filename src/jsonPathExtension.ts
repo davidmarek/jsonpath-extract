@@ -1,6 +1,7 @@
 'use strict';
 
 import * as vscode from 'vscode';
+import * as _ from 'lodash';
 import { JsonPathQueryEngine } from './jsonPathQueryEngine';
 import { ResultFormatter } from './resultFormatter';
 import { VSCodeFunctions } from './vsCodeFunctions';
@@ -62,9 +63,15 @@ export class JsonPathExtension {
     await this.showContent(content);
   }
 
-  async runSavedQuery(activeTextEditor: vscode.TextEditor) {
+  async runSavedQuery(activeTextEditor: vscode.TextEditor | undefined) {
     if (activeTextEditor === undefined) {
       this.vscode.showErrorMessage(JsonPathExtension.NoJsonDocumentErrorMsg);
+      return;
+    }
+
+    const jsonObject = this.getJsonObject(activeTextEditor);
+    if (jsonObject === undefined) {
+      this.vscode.showErrorMessage(JsonPathExtension.InvalidJsonErrorMsg);
       return;
     }
 
@@ -75,6 +82,16 @@ export class JsonPathExtension {
     }
 
     const selectedQuery = await this.selectSavedQuery(savedQueries);
+    if (selectedQuery === undefined) { return; }
+
+    const result = this.queryEngine.processQuery(selectedQuery.query, jsonObject);
+    if (result.status !== ProcessQueryResultStatus.Success || result.result === undefined) {
+      this.handleError(result);
+      return;
+    }
+
+    const content = this.resultFormatter.format(result.result, this.createJson);
+    await this.showContent(content);
   }
 
   private handleError(result: ProcessQueryResult) {
@@ -117,7 +134,12 @@ export class JsonPathExtension {
     return config;
   }
 
-  private selectSavedQuery(queries: SavedQuery[]): SavedQuery | undefined {
+  private async selectSavedQuery(queries: SavedQuery[]): Promise<SavedQuery | undefined> {
+    const quickPicks = _.map<SavedQuery, vscode.QuickPickItem>(queries, query => ({ label: query.title, detail: query.query }));
+    const selectedPick = await vscode.window.showQuickPick(quickPicks, { canPickMany: false, matchOnDetail: true });
+    if (selectedPick === undefined) { return undefined; }
 
+    const pickedQuery = _.find<SavedQuery>(queries, sq => sq.query === selectedPick.detail);
+    return pickedQuery;
   }
 }

@@ -28,7 +28,8 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     const jsonPathSavedQueries = vscode.commands.registerCommand('jsonPathExtract.savedQuery', () => {
-        vscode.window.showQuickPick([{ label: 'A', detail: '$.a.b', description: 'Download all bs of as' }, { label: 'B', detail: '$[?(@.s == "yes")]' }], { canPickMany: false });
+        const jpe = new JsonPathExtension(queryEngine, resultFormatter, false, vscodeFunctions);
+        jpe.runSavedQuery(vscode.window.activeTextEditor);
     });
 
     context.subscriptions.push(jsonPathPlainText, jsonPathJson, jsonPathSavedQueries);
