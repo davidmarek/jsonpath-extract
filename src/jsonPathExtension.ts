@@ -8,6 +8,7 @@ import { VSCodeFunctions } from './vsCodeFunctions';
 import { ProcessQueryResultStatus } from './processQueryResultStatus';
 import { ProcessQueryResult } from './processQueryResult';
 import { SavedQuery } from './savedQuery';
+import { OutputFormat } from './outputFormat';
 
 export class JsonPathExtension {
   static NoJsonDocumentErrorMsg = "Active editor doesn't show a valid JSON file - please open a valid JSON file first";
@@ -18,22 +19,19 @@ export class JsonPathExtension {
 
   private queryEngine: JsonPathQueryEngine;
   private resultFormatter: ResultFormatter;
-  private createJson: boolean;
   private vscode: VSCodeFunctions;
 
   constructor(
     queryEngine: JsonPathQueryEngine,
     resultFormatter: ResultFormatter,
-    pasteAsJson: boolean,
     vscodeFunctions: VSCodeFunctions
   ) {
     this.queryEngine = queryEngine;
     this.resultFormatter = resultFormatter;
-    this.createJson = pasteAsJson;
     this.vscode = vscodeFunctions;
   }
 
-  async run(activeTextEditor: vscode.TextEditor | undefined) {
+  async run(activeTextEditor: vscode.TextEditor | undefined, createJson: boolean) {
     if (activeTextEditor === undefined) {
       this.vscode.showErrorMessage(JsonPathExtension.NoJsonDocumentErrorMsg);
       return;
@@ -58,8 +56,8 @@ export class JsonPathExtension {
       return;
     }
 
-    const content = this.resultFormatter.format(result.result, this.createJson);
-    await this.showContent(content);
+    const content = this.resultFormatter.format(result.result, createJson);
+    await this.showContent(content, createJson);
   }
 
   async runSavedQuery(activeTextEditor: vscode.TextEditor | undefined) {
@@ -89,8 +87,9 @@ export class JsonPathExtension {
       return;
     }
 
-    const content = this.resultFormatter.format(result.result, this.createJson);
-    await this.showContent(content);
+    const createJson = selectedQuery.output === OutputFormat.Json;
+    const content = this.resultFormatter.format(result.result, createJson);
+    await this.showContent(content, createJson);
   }
 
   private handleError(result: ProcessQueryResult) {
@@ -122,8 +121,8 @@ export class JsonPathExtension {
     }
   }
 
-  private async showContent(content: string) {
-    const language = this.createJson ? 'json' : 'text';
+  private async showContent(content: string, createJson: boolean) {
+    const language = createJson ? 'json' : 'text';
     const doc = await this.vscode.openTextDocument({ content, language });
     await this.vscode.showTextDocument(doc);
   }

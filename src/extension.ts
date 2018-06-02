@@ -18,17 +18,17 @@ export function activate(context: vscode.ExtensionContext) {
     };
 
     const jsonPathPlainText = vscode.commands.registerCommand('jsonPathExtract.queryToPlainText', () => {
-        const jpe = new JsonPathExtension(queryEngine, resultFormatter, false, vscodeFunctions);
-        jpe.run(vscode.window.activeTextEditor);
+        const jpe = new JsonPathExtension(queryEngine, resultFormatter, vscodeFunctions);
+        jpe.run(vscode.window.activeTextEditor, false);
     });
 
     const jsonPathJson = vscode.commands.registerCommand('jsonPathExtract.queryToJson', () => {
-        const jpe = new JsonPathExtension(queryEngine, resultFormatter, true, vscodeFunctions);
-        jpe.run(vscode.window.activeTextEditor);
+        const jpe = new JsonPathExtension(queryEngine, resultFormatter, vscodeFunctions);
+        jpe.run(vscode.window.activeTextEditor, true);
     });
 
     const jsonPathSavedQueries = vscode.commands.registerCommand('jsonPathExtract.savedQuery', () => {
-        const jpe = new JsonPathExtension(queryEngine, resultFormatter, false, vscodeFunctions);
+        const jpe = new JsonPathExtension(queryEngine, resultFormatter, vscodeFunctions);
         jpe.runSavedQuery(vscode.window.activeTextEditor);
     });
 
