@@ -70,7 +70,7 @@ export class JsonPathExtension {
 
     const jsonObject = this.getJsonObject(activeTextEditor);
     if (jsonObject === undefined) {
-      this.vscode.showErrorMessage(JsonPathExtension.InvalidJsonErrorMsg);
+      this.vscode.showErrorMessage(JsonPathExtension.NoJsonDocumentErrorMsg);
       return;
     }
 
