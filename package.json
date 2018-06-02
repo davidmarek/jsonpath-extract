@@ -47,7 +47,36 @@
                 "title": "Run saved jsonpath query",
                 "category": "JPE"
             }
-        ]
+        ],
+        "configuration": {
+            "title": "JSONPath Extract configuration",
+            "properties": {
+                "jsonPathExtract:savedQueries": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "type": "string",
+                                "description": "The title of your query"
+                            },
+                            "query": {
+                                "type": "string",
+                                "description": "The JSONPath query"
+                            },
+                            "output": {
+                                "type": "string",
+                                "description": "The output format (plaintext or json)",
+                                "enum": [
+                                    "plaintext",
+                                    "json"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
