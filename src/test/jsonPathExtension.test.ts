@@ -2,20 +2,23 @@
 
 import * as vscode from 'vscode';
 import * as TM from 'typemoq';
-import { JsonPathExtension, IVSCodeFunctions } from '../jsonPathExtension';
-import { JsonPathQueryEngine, ProcessQueryResult, ProcessQueryResultStatus } from '../jsonPathQueryEngine';
-import ResultFormatter from '../resultFormatter';
+import { JsonPathExtension } from '../jsonPathExtension';
+import { JsonPathQueryEngine } from '../jsonPathQueryEngine';
+import { ResultFormatter } from '../resultFormatter';
+import { VSCodeFunctions } from '../vsCodeFunctions';
+import { ProcessQueryResultStatus } from '../ProcessQueryResultStatus';
+import { ProcessQueryResult } from '../processQueryResult';
 
 describe('JsonPathExtension', function() {
   describe('#run()', function() {
-    let vscodeMock : TM.IMock<IVSCodeFunctions>;
+    let vscodeMock : TM.IMock<VSCodeFunctions>;
     let documentMock : TM.IMock<vscode.TextDocument>;
     let editorMock : TM.IMock<vscode.TextEditor>;
     let queryEngineMock : TM.IMock<JsonPathQueryEngine>;
     let resultFormatterMock : TM.IMock<ResultFormatter>;
 
     beforeEach(function() {
-      vscodeMock = TM.Mock.ofType<IVSCodeFunctions>();
+      vscodeMock = TM.Mock.ofType<VSCodeFunctions>();
       documentMock = TM.Mock.ofType<vscode.TextDocument>();
       editorMock = TM.Mock.ofType<vscode.TextEditor>();
       queryEngineMock = TM.Mock.ofType<JsonPathQueryEngine>();

@@ -2,13 +2,14 @@
 
 import * as vscode from 'vscode';
 import { JsonPathQueryEngine } from './jsonPathQueryEngine';
-import ResultFormatter from './resultFormatter';
-import { IVSCodeFunctions, JsonPathExtension } from './jsonPathExtension';
+import { ResultFormatter } from './resultFormatter';
+import { JsonPathExtension } from './jsonPathExtension';
+import { VSCodeFunctions } from './vscodeFunctions';
 
 export function activate(context: vscode.ExtensionContext) {
     const queryEngine = new JsonPathQueryEngine();
     const resultFormatter = new ResultFormatter();
-    const vscodeFunctions : IVSCodeFunctions = {
+    const vscodeFunctions : VSCodeFunctions = {
         openTextDocument: vscode.workspace.openTextDocument,
         showTextDocument: vscode.window.showTextDocument,
         showErrorMessage: vscode.window.showErrorMessage,

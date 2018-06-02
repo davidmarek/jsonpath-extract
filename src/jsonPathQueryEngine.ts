@@ -1,18 +1,8 @@
 'use strict';
 
 import * as jp from 'jsonpath';
-
-export enum ProcessQueryResultStatus {
-  InvalidQuery,
-  NoData,
-  Error,
-  Success
-}
-
-export class ProcessQueryResult {
-  constructor(readonly status : ProcessQueryResultStatus, readonly result? : any[]) {
-  }
-}
+import { ProcessQueryResultStatus } from './ProcessQueryResultStatus';
+import { ProcessQueryResult } from './processQueryResult';
 
 export class JsonPathQueryEngine {
   processQuery(query : string, jsonObject : any) : ProcessQueryResult {

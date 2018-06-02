@@ -2,7 +2,7 @@
 
 import * as _ from 'lodash';
 
-export default class ResultFormatter {
+export class ResultFormatter {
   format(results: any[], createJson : boolean) : string {
     let content: string;
     if (createJson) {

@@ -1,7 +1,7 @@
 'use strict';
 
 import { assert } from 'chai';
-import ResultFormatter from '../resultFormatter';
+import { ResultFormatter } from '../resultFormatter';
 
 describe('ResultFormatter', function() {
   describe('#format()', function() {

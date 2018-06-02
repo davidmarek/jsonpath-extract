@@ -1,7 +1,8 @@
 'use strict';
 
 import { assert } from 'chai';
-import { JsonPathQueryEngine, ProcessQueryResultStatus } from '../jsonPathQueryEngine';
+import { JsonPathQueryEngine } from '../jsonPathQueryEngine';
+import { ProcessQueryResultStatus } from '../ProcessQueryResultStatus';
 
 describe('JsonPathQueryEngine', function() {
   describe('#processQuery()', function() {

@@ -1,16 +1,11 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import { JsonPathQueryEngine, ProcessQueryResult, ProcessQueryResultStatus } from './jsonPathQueryEngine';
-import ResultFormatter from './resultFormatter';
-
-export interface IVSCodeFunctions {
-  showErrorMessage: (message: string, ...items: string[]) => Thenable<string | undefined>;
-  showInputBox: (options?: vscode.InputBoxOptions, token?: vscode.CancellationToken) => Thenable<string | undefined>;
-  showInformationMessage: (message: string, ...items: string[]) => Thenable<string | undefined>;
-  openTextDocument: (options?: { language?: string; content?: string; }) => Thenable<vscode.TextDocument>;
-  showTextDocument: (document: vscode.TextDocument, column?: vscode.ViewColumn, preserveFocus?: boolean) => Thenable<vscode.TextEditor>;
-}
+import { JsonPathQueryEngine } from './jsonPathQueryEngine';
+import { ResultFormatter } from './resultFormatter';
+import { VSCodeFunctions } from './vsCodeFunctions';
+import { ProcessQueryResultStatus } from './ProcessQueryResultStatus';
+import { ProcessQueryResult } from './processQueryResult';
 
 export class JsonPathExtension {
   static NoJsonDocumentErrorMsg = "No json document opened.";
@@ -22,13 +17,13 @@ export class JsonPathExtension {
   private queryEngine: JsonPathQueryEngine;
   private resultFormatter: ResultFormatter;
   private createJson : boolean;
-  private vscode : IVSCodeFunctions;
+  private vscode : VSCodeFunctions;
 
   constructor(
     queryEngine: JsonPathQueryEngine, 
     resultFormatter: ResultFormatter, 
     pasteAsJson : boolean,
-    vscodeFunctions: IVSCodeFunctions
+    vscodeFunctions: VSCodeFunctions
   ) {
     this.queryEngine = queryEngine;
     this.resultFormatter = resultFormatter;
