@@ -3,6 +3,13 @@ All notable changes to the **JSONPath Extract** extension will be documented in 
 
 ## [Unreleased]
 
+## [0.2.2] - 2018-06-02
+### Added
+- New logo
+
+### Changed
+- Merged and modified error message for no active editor and invalid json
+
 ## [0.2.0] - 2018-06-02
 ### Added
 - Integration tests
