@@ -6,7 +6,7 @@ import { JsonPathExtension } from '../jsonPathExtension';
 import { JsonPathQueryEngine } from '../jsonPathQueryEngine';
 import { ResultFormatter } from '../resultFormatter';
 import { VSCodeFunctions } from '../vsCodeFunctions';
-import { ProcessQueryResultStatus } from '../ProcessQueryResultStatus';
+import { ProcessQueryResultStatus } from '../processQueryResultStatus';
 import { ProcessQueryResult } from '../processQueryResult';
 
 describe('JsonPathExtension', function () {
@@ -31,7 +31,7 @@ describe('JsonPathExtension', function () {
       const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, false, vscodeMock.object);
       await extension.run(undefined);
 
-      vscodeMock.verify(vs => vs.showErrorMessage("No json document opened."), TM.Times.once());
+      vscodeMock.verify(vs => vs.showErrorMessage('No json document opened.'), TM.Times.once());
     });
 
     it('should show error if document is not valid json', async function () {
@@ -40,7 +40,7 @@ describe('JsonPathExtension', function () {
       const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, false, vscodeMock.object);
       await extension.run(editorMock.object);
 
-      vscodeMock.verify(vs => vs.showErrorMessage("Document is not valid json."), TM.Times.once());
+      vscodeMock.verify(vs => vs.showErrorMessage('Document is not valid json.'), TM.Times.once());
     });
 
     it('should show error if document is not valid json (text)', async function () {
@@ -49,7 +49,7 @@ describe('JsonPathExtension', function () {
       const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, false, vscodeMock.object);
       await extension.run(editorMock.object);
 
-      vscodeMock.verify(vs => vs.showErrorMessage("Document is not valid json."), TM.Times.once());
+      vscodeMock.verify(vs => vs.showErrorMessage('Document is not valid json.'), TM.Times.once());
     });
 
     it('should show error if document is not valid json (number)', async function () {
@@ -58,7 +58,7 @@ describe('JsonPathExtension', function () {
       const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, false, vscodeMock.object);
       await extension.run(editorMock.object);
 
-      vscodeMock.verify(vs => vs.showErrorMessage("Document is not valid json."), TM.Times.once());
+      vscodeMock.verify(vs => vs.showErrorMessage('Document is not valid json.'), TM.Times.once());
     });
 
     it('should show error if document is not valid json (string)', async function () {
@@ -67,7 +67,7 @@ describe('JsonPathExtension', function () {
       const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, false, vscodeMock.object);
       await extension.run(editorMock.object);
 
-      vscodeMock.verify(vs => vs.showErrorMessage("Document is not valid json."), TM.Times.once());
+      vscodeMock.verify(vs => vs.showErrorMessage('Document is not valid json.'), TM.Times.once());
     });
 
     it('should show error if document is not valid json (null)', async function () {
@@ -76,7 +76,7 @@ describe('JsonPathExtension', function () {
       const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, false, vscodeMock.object);
       await extension.run(editorMock.object);
 
-      vscodeMock.verify(vs => vs.showErrorMessage("Document is not valid json."), TM.Times.once());
+      vscodeMock.verify(vs => vs.showErrorMessage('Document is not valid json.'), TM.Times.once());
     });
 
     it('should show input box if document is valid json', function () {
@@ -88,7 +88,7 @@ describe('JsonPathExtension', function () {
       const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, false, vscodeMock.object);
       extension.run(editorMock.object);
 
-      vscodeMock.verify(vs => vs.showInputBox(TM.It.isObjectWith({ prompt: "Enter jsonpath." })), TM.Times.once());
+      vscodeMock.verify(vs => vs.showInputBox(TM.It.isObjectWith({ prompt: 'Enter jsonpath.' })), TM.Times.once());
     });
 
     it('should show error if jsonpath query is invalid', async function () {
@@ -101,7 +101,7 @@ describe('JsonPathExtension', function () {
       const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, false, vscodeMock.object);
       await extension.run(editorMock.object);
 
-      vscodeMock.verify(vs => vs.showErrorMessage("Provided jsonpath expression is not valid."), TM.Times.once());
+      vscodeMock.verify(vs => vs.showErrorMessage('Provided jsonpath expression is not valid.'), TM.Times.once());
     });
 
     it('should not show error if input was canceled', async function () {
@@ -126,12 +126,12 @@ describe('JsonPathExtension', function () {
       const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, false, vscodeMock.object);
       await extension.run(editorMock.object);
 
-      vscodeMock.verify(vs => vs.showInformationMessage("No results found for provided jsonpath."), TM.Times.once());
+      vscodeMock.verify(vs => vs.showInformationMessage('No results found for provided jsonpath.'), TM.Times.once());
     });
 
     it('should pass the document and query to query engine', async function () {
       const expectedObject = { A: 1, B: { C: 2 } };
-      const expectedQuery = "$.B.C";
+      const expectedQuery = '$.B.C';
       setupMocks({
         content: JSON.stringify(expectedObject),
         query: expectedQuery,
@@ -146,7 +146,7 @@ describe('JsonPathExtension', function () {
 
     it('should pass the found data to formatter', async function () {
       const expectedObject = { A: 1, B: { C: 2 } };
-      const expectedQuery = "$.B.C";
+      const expectedQuery = '$.B.C';
       const expectedResult = [2];
       setupMocks({
         content: JSON.stringify(expectedObject),
@@ -162,7 +162,7 @@ describe('JsonPathExtension', function () {
 
     it('should send the formatted result to new document', async function () {
       const expectedObject = { A: 1, B: { C: 2 } };
-      const expectedQuery = "$.B.C";
+      const expectedQuery = '$.B.C';
       const expectedResult = [2];
       const expectedContent = JSON.stringify(expectedResult);
       setupMocks({
@@ -181,7 +181,7 @@ describe('JsonPathExtension', function () {
     it('should show the open document with results', async function () {
       const expectedDocument = TM.Mock.ofType<vscode.TextDocument>();
       const expectedObject = { A: 1, B: { C: 2 } };
-      const expectedQuery = "$.B.C";
+      const expectedQuery = '$.B.C';
       const expectedResult = [2];
       const expectedContent = JSON.stringify(expectedResult);
 

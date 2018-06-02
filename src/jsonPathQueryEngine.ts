@@ -1,7 +1,7 @@
 'use strict';
 
 import * as jp from 'jsonpath';
-import { ProcessQueryResultStatus } from './ProcessQueryResultStatus';
+import { ProcessQueryResultStatus } from './processQueryResultStatus';
 import { ProcessQueryResult } from './processQueryResult';
 
 export class JsonPathQueryEngine {

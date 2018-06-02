@@ -4,15 +4,15 @@ import * as vscode from 'vscode';
 import { JsonPathQueryEngine } from './jsonPathQueryEngine';
 import { ResultFormatter } from './resultFormatter';
 import { VSCodeFunctions } from './vsCodeFunctions';
-import { ProcessQueryResultStatus } from './ProcessQueryResultStatus';
+import { ProcessQueryResultStatus } from './processQueryResultStatus';
 import { ProcessQueryResult } from './processQueryResult';
 
 export class JsonPathExtension {
-  static NoJsonDocumentErrorMsg = "No json document opened.";
-  static InvalidJsonErrorMsg = "Document is not valid json.";
-  static InvalidJsonPathErrorMsg = "Provided jsonpath expression is not valid.";
-  static EnterJsonPathPrompt = "Enter jsonpath.";
-  static NoResultsFoundMsg = "No results found for provided jsonpath.";
+  static NoJsonDocumentErrorMsg = 'No json document opened.';
+  static InvalidJsonErrorMsg = 'Document is not valid json.';
+  static InvalidJsonPathErrorMsg = 'Provided jsonpath expression is not valid.';
+  static EnterJsonPathPrompt = 'Enter jsonpath.';
+  static NoResultsFoundMsg = 'No results found for provided jsonpath.';
 
   private queryEngine: JsonPathQueryEngine;
   private resultFormatter: ResultFormatter;
