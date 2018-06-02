@@ -73,7 +73,12 @@
                                 ]
                             }
                         }
-                    }
+                    },
+                    "required": [
+                        "title",
+                        "query",
+                        "output"
+                    ]
                 }
             }
         }
