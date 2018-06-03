@@ -345,7 +345,7 @@ describe('JsonPathExtension', function () {
       vscodeMock.verify(vs => vs.showErrorMessage('Provided jsonpath expression is not valid.'), TM.Times.once());
     });
 
-    it.only('should show error if there are no saved queries', async function () {
+    it('should show error if there are no saved queries', async function () {
       setupMocks({
         content: '{}',
         savedQueries: []
