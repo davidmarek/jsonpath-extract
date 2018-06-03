@@ -1,4 +1,7 @@
-# JSONPath Extract [![Build Status](https://travis-ci.com/davidmarek/jsonpath-extract.svg?branch=master)](https://travis-ci.com/davidmarek/jsonpath-extract)
+# JSONPath Extract 
+
+[![Visual Studio Marketplace](https://img.shields.io/vscode-marketplace/v/davidmarek.jsonpath-extract.svg)](https://marketplace.visualstudio.com/items?itemName=davidmarek.jsonpath-extract)
+[![Build Status](https://travis-ci.com/davidmarek/jsonpath-extract.svg?branch=master)](https://travis-ci.com/davidmarek/jsonpath-extract)
 
 JSONPath Extract is a Visual Studio Code extension that allows you to extract parts of a JSON document using a JSONPath query.
 
