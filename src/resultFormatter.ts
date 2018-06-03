@@ -15,9 +15,9 @@ export class ResultFormatter {
   }
 
   private convertResultToString(result: any): string {
-    if (typeof result === "string") {
+    if (typeof result === 'string') {
       return result;
-    } else if (typeof result === "number") {
+    } else if (typeof result === 'number') {
       return result.toString();
     } else {
       return JSON.stringify(result);
