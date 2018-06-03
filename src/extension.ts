@@ -14,7 +14,9 @@ export function activate(context: vscode.ExtensionContext) {
         showTextDocument: vscode.window.showTextDocument,
         showErrorMessage: vscode.window.showErrorMessage,
         showInformationMessage: vscode.window.showInformationMessage,
-        showInputBox: vscode.window.showInputBox
+        showInputBox: vscode.window.showInputBox,
+        getConfiguration: vscode.workspace.getConfiguration,
+        showQuickPick: vscode.window.showQuickPick
     };
 
     const jsonPathPlainText = vscode.commands.registerCommand('jsonPathExtract.queryToPlainText', () => {

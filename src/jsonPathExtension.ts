@@ -128,13 +128,13 @@ export class JsonPathExtension {
   }
 
   private getSavedQueries(): SavedQuery[] | undefined {
-    const config = vscode.workspace.getConfiguration('jsonPathExtract').get<SavedQuery[]>('savedQueries');
+    const config = this.vscode.getConfiguration('jsonPathExtract').get<SavedQuery[]>('savedQueries');
     return config;
   }
 
   private async selectSavedQuery(queries: SavedQuery[]): Promise<SavedQuery | undefined> {
     const quickPicks = _.map<SavedQuery, vscode.QuickPickItem>(queries, query => ({ label: query.title, detail: query.query }));
-    const selectedPick = await vscode.window.showQuickPick(quickPicks, { canPickMany: false, matchOnDetail: true });
+    const selectedPick = await this.vscode.showQuickPick(quickPicks, { canPickMany: false, matchOnDetail: true });
     if (selectedPick === undefined) { return undefined; }
 
     const pickedQuery = _.find<SavedQuery>(queries, sq => sq.query === selectedPick.detail);
