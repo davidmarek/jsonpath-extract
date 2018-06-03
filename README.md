@@ -26,11 +26,10 @@ You need to define your queries in either your user or workspace configuration.
 If you want to run `$.store.book[?(@.category == "fiction")].title` to get titles of all fiction books and extract them to JSON array, you can create the following configuration.
 ```json
 {
-    ...
     "jsonPathExtract.savedQueries": [
         {
             "output": "json",
-            "query": "$.store.book[?(@.category == "fiction")].title",
+            "query": "$.store.book[?(@.category == \"fiction\")].title",
             "title": "Titles of all fictional books"
         }
     ]
