@@ -13,7 +13,7 @@ import { OutputFormat } from './outputFormat';
 export class JsonPathExtension {
   static NoJsonDocumentErrorMsg = "Active editor doesn't show a valid JSON file - please open a valid JSON file first";
   static InvalidJsonPathErrorMsg = 'Provided jsonpath expression is not valid.';
-  static NoSavedQueriesErrorMsg = 'No queries found in configuration.';
+  static NoSavedQueriesErrorMsg = "Couldn't find any JSONPath queries in configuration.";
   static EnterJsonPathPrompt = 'Enter jsonpath.';
   static NoResultsFoundMsg = 'No results found for provided jsonpath.';
 
@@ -73,7 +73,7 @@ export class JsonPathExtension {
     }
 
     const savedQueries = this.getSavedQueries();
-    if (savedQueries === undefined) {
+    if (savedQueries === undefined || savedQueries.length === 0) {
       this.vscode.showErrorMessage(JsonPathExtension.NoSavedQueriesErrorMsg);
       return;
     }

@@ -345,6 +345,18 @@ describe('JsonPathExtension', function () {
       vscodeMock.verify(vs => vs.showErrorMessage('Provided jsonpath expression is not valid.'), TM.Times.once());
     });
 
+    it.only('should show error if there are no saved queries', async function () {
+      setupMocks({
+        content: '{}',
+        savedQueries: []
+      });
+
+      const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, vscodeMock.object);
+      await extension.runSavedQuery(editorMock.object);
+
+      vscodeMock.verify(vs => vs.showErrorMessage("Couldn't find any JSONPath queries in configuration."), TM.Times.once());
+    });
+
     it('should not show error if input was canceled', async function () {
       const savedQueries: SavedQuery[] = [
         { title: 'A', output: OutputFormat.Json, query: '$.a' },
