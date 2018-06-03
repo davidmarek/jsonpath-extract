@@ -14,21 +14,24 @@ export function activate(context: vscode.ExtensionContext) {
         showTextDocument: vscode.window.showTextDocument,
         showErrorMessage: vscode.window.showErrorMessage,
         showInformationMessage: vscode.window.showInformationMessage,
-        showInputBox: vscode.window.showInputBox
+        showInputBox: vscode.window.showInputBox,
+        getConfiguration: vscode.workspace.getConfiguration,
+        showQuickPick: vscode.window.showQuickPick
     };
 
     const jsonPathPlainText = vscode.commands.registerCommand('jsonPathExtract.queryToPlainText', () => {
-        const jpe = new JsonPathExtension(queryEngine, resultFormatter, false, vscodeFunctions);
-        jpe.run(vscode.window.activeTextEditor);
+        const jpe = new JsonPathExtension(queryEngine, resultFormatter, vscodeFunctions);
+        jpe.run(vscode.window.activeTextEditor, false);
     });
 
     const jsonPathJson = vscode.commands.registerCommand('jsonPathExtract.queryToJson', () => {
-        const jpe = new JsonPathExtension(queryEngine, resultFormatter, true, vscodeFunctions);
-        jpe.run(vscode.window.activeTextEditor);
+        const jpe = new JsonPathExtension(queryEngine, resultFormatter, vscodeFunctions);
+        jpe.run(vscode.window.activeTextEditor, true);
     });
 
     const jsonPathSavedQueries = vscode.commands.registerCommand('jsonPathExtract.savedQuery', () => {
-        vscode.window.showQuickPick([{ label: 'A', detail: '$.a.b', description: 'Download all bs of as' }, { label: 'B', detail: '$[?(@.s == "yes")]' }], { canPickMany: false });
+        const jpe = new JsonPathExtension(queryEngine, resultFormatter, vscodeFunctions);
+        jpe.runSavedQuery(vscode.window.activeTextEditor);
     });
 
     context.subscriptions.push(jsonPathPlainText, jsonPathJson, jsonPathSavedQueries);

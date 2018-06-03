@@ -56,7 +56,7 @@
         "configuration": {
             "title": "JSONPath Extract configuration",
             "properties": {
-                "jsonPathExtract:savedQueries": {
+                "jsonPathExtract.savedQueries": {
                     "type": "array",
                     "items": {
                         "type": "object",
@@ -78,7 +78,12 @@
                                 ]
                             }
                         }
-                    }
+                    },
+                    "required": [
+                        "title",
+                        "query",
+                        "output"
+                    ]
                 }
             }
         }

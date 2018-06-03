@@ -7,7 +7,9 @@ JSONPath Extract is a Visual Studio Code extension that allows you to extract pa
 
 ## Features
 
-Currently there are two commands, both can be accessed via **Ctrl + Shift + P** (*Cmd + Alt + P* on Mac) typing **JPE**.
+Currently there are three commands, all can be accessed via **Ctrl + Shift + P** (*Cmd + Alt + P* on Mac) typing **JPE**.
+
+![JSONPath Extract usage](/images/usage.gif)
 
 ### JPE: Run jsonpath query - plaintext
 
@@ -17,7 +19,22 @@ This command asks for a JSONPath query, runs it on the currently opened document
 
 This command works just like **JPE: Run jsonpath query - plaintext**, except that results are pasted as a JSON array to a new file.
 
-![JSONPath Extract usage](/images/usage.gif)
+### JPE: Run saved jsonpath query
+
+If you find yourself typing the same query over and over, you can use this command to run prepared queries from a configuration.
+You need to define your queries in either your user or workspace configuration. 
+If you want to run `$.store.book[?(@.category == "fiction")].title` to get titles of all fiction books and extract them to JSON array, you can create the following configuration.
+```json
+{
+    "jsonPathExtract.savedQueries": [
+        {
+            "output": "json",
+            "query": "$.store.book[?(@.category == \"fiction\")].title",
+            "title": "Titles of all fictional books"
+        }
+    ]
+}
+```
 
 ## JSONPath basics
 

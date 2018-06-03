@@ -1,36 +1,37 @@
 'use strict';
 
 import * as vscode from 'vscode';
+import * as _ from 'lodash';
 import { JsonPathQueryEngine } from './jsonPathQueryEngine';
 import { ResultFormatter } from './resultFormatter';
 import { VSCodeFunctions } from './vsCodeFunctions';
 import { ProcessQueryResultStatus } from './processQueryResultStatus';
 import { ProcessQueryResult } from './processQueryResult';
+import { SavedQuery } from './savedQuery';
+import { OutputFormat } from './outputFormat';
 
 export class JsonPathExtension {
   static NoJsonDocumentErrorMsg = "Active editor doesn't show a valid JSON file - please open a valid JSON file first";
   static InvalidJsonPathErrorMsg = 'Provided jsonpath expression is not valid.';
+  static NoSavedQueriesErrorMsg = "Couldn't find any JSONPath queries in configuration.";
   static EnterJsonPathPrompt = 'Enter jsonpath.';
   static NoResultsFoundMsg = 'No results found for provided jsonpath.';
 
   private queryEngine: JsonPathQueryEngine;
   private resultFormatter: ResultFormatter;
-  private createJson: boolean;
   private vscode: VSCodeFunctions;
 
   constructor(
     queryEngine: JsonPathQueryEngine,
     resultFormatter: ResultFormatter,
-    pasteAsJson: boolean,
     vscodeFunctions: VSCodeFunctions
   ) {
     this.queryEngine = queryEngine;
     this.resultFormatter = resultFormatter;
-    this.createJson = pasteAsJson;
     this.vscode = vscodeFunctions;
   }
 
-  async run(activeTextEditor: vscode.TextEditor | undefined) {
+  async run(activeTextEditor: vscode.TextEditor | undefined, createJson: boolean) {
     if (activeTextEditor === undefined) {
       this.vscode.showErrorMessage(JsonPathExtension.NoJsonDocumentErrorMsg);
       return;
@@ -55,8 +56,40 @@ export class JsonPathExtension {
       return;
     }
 
-    const content = this.resultFormatter.format(result.result, this.createJson);
-    await this.showContent(content);
+    const content = this.resultFormatter.format(result.result, createJson);
+    await this.showContent(content, createJson);
+  }
+
+  async runSavedQuery(activeTextEditor: vscode.TextEditor | undefined) {
+    if (activeTextEditor === undefined) {
+      this.vscode.showErrorMessage(JsonPathExtension.NoJsonDocumentErrorMsg);
+      return;
+    }
+
+    const jsonObject = this.getJsonObject(activeTextEditor);
+    if (jsonObject === undefined) {
+      this.vscode.showErrorMessage(JsonPathExtension.NoJsonDocumentErrorMsg);
+      return;
+    }
+
+    const savedQueries = this.getSavedQueries();
+    if (savedQueries === undefined || savedQueries.length === 0) {
+      this.vscode.showErrorMessage(JsonPathExtension.NoSavedQueriesErrorMsg);
+      return;
+    }
+
+    const selectedQuery = await this.selectSavedQuery(savedQueries);
+    if (selectedQuery === undefined) { return; }
+
+    const result = this.queryEngine.processQuery(selectedQuery.query, jsonObject);
+    if (result.status !== ProcessQueryResultStatus.Success || result.result === undefined) {
+      this.handleError(result);
+      return;
+    }
+
+    const createJson = selectedQuery.output === OutputFormat.Json;
+    const content = this.resultFormatter.format(result.result, createJson);
+    await this.showContent(content, createJson);
   }
 
   private handleError(result: ProcessQueryResult) {
@@ -88,9 +121,23 @@ export class JsonPathExtension {
     }
   }
 
-  private async showContent(content: string) {
-    const language = this.createJson ? 'json' : 'text';
+  private async showContent(content: string, createJson: boolean) {
+    const language = createJson ? 'json' : 'text';
     const doc = await this.vscode.openTextDocument({ content, language });
     await this.vscode.showTextDocument(doc);
+  }
+
+  private getSavedQueries(): SavedQuery[] | undefined {
+    const config = this.vscode.getConfiguration('jsonPathExtract').get<SavedQuery[]>('savedQueries');
+    return config;
+  }
+
+  private async selectSavedQuery(queries: SavedQuery[]): Promise<SavedQuery | undefined> {
+    const quickPicks = _.map<SavedQuery, vscode.QuickPickItem>(queries, query => ({ label: query.title, detail: query.query }));
+    const selectedPick = await this.vscode.showQuickPick(quickPicks, { canPickMany: false, matchOnDetail: true });
+    if (selectedPick === undefined) { return undefined; }
+
+    const pickedQuery = _.find<SavedQuery>(queries, sq => sq.query === selectedPick.detail);
+    return pickedQuery;
   }
 }
