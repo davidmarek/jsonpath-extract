@@ -5,6 +5,7 @@ All notable changes to the **JSONPath Extract** extension will be documented in 
 ### Added
 - New command **JPE: Run saved jsonpath query**, that runs jsonpath query predefined in configuration.
 - Configuration `jsonPathExtract.savedQueries` to define often used queries.
+- Explanation for **JPE: Run saved jsonpath query** to README.
 
 ## [0.2.2] - 2018-06-02
 ### Added
