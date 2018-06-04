@@ -1,6 +1,6 @@
 'use strict';
 
 export enum OutputFormat {
-  PlainText = 'plaintext',
-  Json = 'json'
+    PlainText = 'plaintext',
+    Json = 'json'
 }

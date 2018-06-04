@@ -3,6 +3,6 @@
 import { ProcessQueryResultStatus } from './processQueryResultStatus';
 
 export class ProcessQueryResult {
-  constructor(readonly status: ProcessQueryResultStatus, readonly result?: any[]) {
-  }
+    constructor(readonly status: ProcessQueryResultStatus, readonly result?: any[]) {
+    }
 }
