@@ -133,8 +133,8 @@ export class JsonPathExtension {
     }
 
     private async selectSavedQuery(queries: SavedQuery[]): Promise<SavedQuery | undefined> {
-        const quickPicks = _.map<SavedQuery, vscode.QuickPickItem>(queries, query => ({ label: query.title, detail: query.query }));
-        const selectedPick = await this.vscode.showQuickPick(quickPicks, { canPickMany: false, matchOnDetail: true });
+        const quickPicks = _.map(queries, query => ({ label: query.title, detail: query.query, description: '' }));
+        const selectedPick = await this.vscode.showQuickPick(quickPicks, { matchOnDetail: true });
         if (selectedPick === undefined) { return undefined; }
 
         const pickedQuery = _.find<SavedQuery>(queries, sq => sq.query === selectedPick.detail);

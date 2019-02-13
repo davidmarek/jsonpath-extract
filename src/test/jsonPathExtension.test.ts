@@ -313,8 +313,8 @@ describe('JsonPathExtension', function () {
                 { title: 'B', output: OutputFormat.PlainText, query: '$.b' }
             ];
             const expectedQuickPickItems: vscode.QuickPickItem[] = [
-                { label: 'A', detail: '$.a' },
-                { label: 'B', detail: '$.b' }
+                { label: 'A', detail: '$.a', description: '' },
+                { label: 'B', detail: '$.b', description: '' }
             ];
             setupMocks({
                 content: '{}',
@@ -324,7 +324,7 @@ describe('JsonPathExtension', function () {
             const extension = new JsonPathExtension(queryEngineMock.object, resultFormatterMock.object, vscodeMock.object);
             await extension.runSavedQuery(editorMock.object);
 
-            vscodeMock.verify(vs => vs.showQuickPick(expectedQuickPickItems, TM.It.isObjectWith<vscode.QuickPickOptions>({ canPickMany: false, matchOnDetail: true })), TM.Times.once());
+            vscodeMock.verify(vs => vs.showQuickPick(expectedQuickPickItems, TM.It.isObjectWith<vscode.QuickPickOptions>({ matchOnDetail: true })), TM.Times.once());
         });
 
         it('should show error if jsonpath query is invalid', async function () {
@@ -335,7 +335,7 @@ describe('JsonPathExtension', function () {
             setupMocks({
                 content: '{}',
                 savedQueries,
-                selectedQuery: { label: 'A', detail: '$.a[' },
+                selectedQuery: { label: 'A', detail: '$.a[', description: '' },
                 queryResultStatus: ProcessQueryResultStatus.InvalidQuery
             });
 
@@ -381,7 +381,7 @@ describe('JsonPathExtension', function () {
             setupMocks({
                 content: '{}',
                 savedQueries,
-                selectedQuery: { label: 'A', detail: '$.a' },
+                selectedQuery: { label: 'A', detail: '$.a', description: '' },
                 queryResultStatus: ProcessQueryResultStatus.NoData
             });
 
@@ -401,7 +401,7 @@ describe('JsonPathExtension', function () {
             setupMocks({
                 content: JSON.stringify(expectedObject),
                 savedQueries,
-                selectedQuery: { label: 'A', detail: expectedQuery },
+                selectedQuery: { label: 'A', detail: expectedQuery, description: '' },
                 queryResultValue: []
             });
 
@@ -422,7 +422,7 @@ describe('JsonPathExtension', function () {
             setupMocks({
                 content: JSON.stringify(expectedObject),
                 savedQueries,
-                selectedQuery: { label: 'A', detail: expectedQuery },
+                selectedQuery: { label: 'A', detail: expectedQuery, description: '' },
                 queryResultValue: expectedResult
             });
 
@@ -444,7 +444,7 @@ describe('JsonPathExtension', function () {
             setupMocks({
                 content: JSON.stringify(expectedObject),
                 savedQueries,
-                selectedQuery: { label: 'A', detail: expectedQuery },
+                selectedQuery: { label: 'A', detail: expectedQuery, description: '' },
                 queryResultValue: expectedResult,
                 formattedContent: expectedContent
             });
@@ -469,7 +469,7 @@ describe('JsonPathExtension', function () {
             setupMocks({
                 content: JSON.stringify(expectedObject),
                 savedQueries,
-                selectedQuery: { label: 'A', detail: expectedQuery },
+                selectedQuery: { label: 'A', detail: expectedQuery, description: '' },
                 queryResultValue: expectedResult,
                 newDocumentMock: expectedDocument,
                 formattedContent: expectedContent

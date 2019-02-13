@@ -1,7 +1,7 @@
 {
     "name": "jsonpath-extract",
-    "displayName": "JSONPath Extract",
-    "description": "Use JSONPath to extract parts of your json document.",
+    "displayName": "JSON Path Extract",
+    "description": "Use JSON Path to extract parts of your json document.",
     "version": "0.3.0",
     "publisher": "davidmarek",
     "license": "SEE LICENSE IN LICENSE",
@@ -98,16 +98,16 @@
     "devDependencies": {
         "@types/chai": "^4.1.7",
         "@types/jsonpath": "^0.2.0",
-        "@types/lodash": "^4.14.121",
-        "@types/mocha": "^2.2.42",
-        "@types/node": "^7.10.3",
+        "@types/mocha": "^5.2.6",
+        "@types/node": "^11.9.3",
         "chai": "^4.2.0",
         "tslint": "^5.12.1",
         "typemoq": "^2.1.0",
-        "typescript": "^2.9.2",
+        "typescript": "^3.3.3",
         "vscode": "^1.1.29"
     },
     "dependencies": {
+        "@types/lodash": "^4.14.121",
         "jsonpath": "^1.0.0",
         "lodash": "^4.17.11"
     }
