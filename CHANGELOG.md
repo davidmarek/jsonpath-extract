@@ -2,6 +2,8 @@
 All notable changes to the **JSONPath Extract** extension will be documented in this file.
 
 ## [Unreleased]
+### Changed
+- Lowered supported engine version to 1.21.0
 
 ## [0.3.0] - 2018-06-03
 ### Added

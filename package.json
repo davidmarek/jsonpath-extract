@@ -20,7 +20,7 @@
         "url": "https://github.com/davidmarek/jsonpath-extract/issues"
     },
     "engines": {
-        "vscode": "^1.23.0"
+        "vscode": "^1.21.0"
     },
     "categories": [
         "Other"
