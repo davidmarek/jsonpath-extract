@@ -1,6 +1,6 @@
 'use strict';
 
-import * as jp from 'jsonpath';
+import * as jp from '@davidmarek/jsonpath';
 import { ProcessQueryResultStatus } from './processQueryResultStatus';
 import { ProcessQueryResult } from './processQueryResult';
 

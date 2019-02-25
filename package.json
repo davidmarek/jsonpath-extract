@@ -99,7 +99,6 @@
     },
     "devDependencies": {
         "@types/chai": "^4.1.7",
-        "@types/jsonpath": "^0.2.0",
         "@types/mocha": "^5.2.6",
         "@types/node": "^11.9.3",
         "chai": "^4.2.0",
@@ -110,7 +109,7 @@
     },
     "dependencies": {
         "@types/lodash": "^4.14.121",
-        "jsonpath": "^1.0.0",
+        "@davidmarek/jsonpath": "^1.0.2",
         "lodash": "^4.17.11"
     }
 }

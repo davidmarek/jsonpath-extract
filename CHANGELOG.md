@@ -2,6 +2,8 @@
 All notable changes to the **JSONPath Extract** extension will be documented in this file.
 
 ## [Unreleased]
+### Added
+- Support for getting all keys from object by using ".*~"
 
 ## [0.4.0] - 2019-02-13
 ### Changed
