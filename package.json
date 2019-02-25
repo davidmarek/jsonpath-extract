@@ -27,7 +27,9 @@
     ],
     "keywords": [
         "json",
-        "jsonpath"
+        "jsonpath",
+        "path",
+        "document"
     ],
     "activationEvents": [
         "onCommand:jsonPathExtract.queryToPlainText",
