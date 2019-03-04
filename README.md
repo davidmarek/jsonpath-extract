@@ -1,4 +1,4 @@
-# JSONPath Extract 
+# JSONPath Extraction
 
 [![Visual Studio Marketplace](https://img.shields.io/vscode-marketplace/v/davidmarek.jsonpath-extract.svg)](https://marketplace.visualstudio.com/items?itemName=davidmarek.jsonpath-extract)
 [![Build Status](https://travis-ci.com/davidmarek/jsonpath-extract.svg?branch=master)](https://travis-ci.com/davidmarek/jsonpath-extract)
@@ -47,6 +47,7 @@ JSONPath was originally introduced by [Stefan Goessner in 2007](http://goessner.
 | .*name*&nbsp;or&nbsp;["*name*"] |  The child member operator (access value of key *"name"*) |
 | .. | Recursive descent |
 | * | Wildcard matching all objects / elements regardless of their names. |
+| .*~ | Wildcard matching all keys |
 | [*name1*,&nbsp;*name2*,&nbsp;...] | Subscript operator for multiple names or array indices as a set |
 | [*start* : *end* : *step*]| Slice operator |
 | ?() | Applies a filter (script) expression via static evaluation |
@@ -101,6 +102,7 @@ Let's explore the JSONPath expressions on example JSON file representing a books
 | $..book[?(@.price<10)] | All books cheaper than 10 |
 | $..book[:2] | The first two books |
 | $..book[(@.length-1)] | The last book |
+| $.store.*~ | The names of categories in the store |
 
 ## Credits
 
