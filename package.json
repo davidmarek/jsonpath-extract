@@ -2,7 +2,7 @@
     "name": "jsonpath-extract",
     "displayName": "JSONPath Extraction",
     "description": "Use JSONPath to extract parts of your json document. Save often used queries.",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "publisher": "davidmarek",
     "license": "SEE LICENSE IN LICENSE",
     "homepage": "https://github.com/davidmarek/jsonpath-extract",
@@ -109,7 +109,7 @@
     },
     "dependencies": {
         "@types/lodash": "^4.14.121",
-        "@davidmarek/jsonpath": "^1.0.3",
+        "@davidmarek/jsonpath": "^1.0.4",
         "lodash": "^4.17.11"
     }
 }

@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to the **JSONPath Extraction** extension will be documented in this file.
 
+## [1.1.0]
+### Added
+- Upgraded dependencies
+
 ## [1.0.0]
 ### Added
 - Support for getting all keys from object by using ".*~"
