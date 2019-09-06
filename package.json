@@ -1,7 +1,7 @@
 {
     "name": "jsonpath-extract",
     "displayName": "JSONPath Extraction",
-    "description": "Use JSONPath to extract parts of your json document. Save often used queries.",
+    "description": "Use JSONPath to extract parts of your json document. Save often used json path queries.",
     "version": "1.1.0",
     "publisher": "davidmarek",
     "license": "SEE LICENSE IN LICENSE",
@@ -108,8 +108,8 @@
         "vscode": "^1.1.34"
     },
     "dependencies": {
+        "@davidmarek/jsonpath": "^1.0.6",
         "@types/lodash": "^4.14.121",
-        "@davidmarek/jsonpath": "^1.0.4",
-        "lodash": "^4.17.11"
+        "lodash": "^4.17.15"
     }
 }
