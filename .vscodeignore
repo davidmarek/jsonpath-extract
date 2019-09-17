@@ -1,9 +1,13 @@
-.vscode/**
-.vscode-test/**
-out/test/**
+.vscode
+.vscode-test
+out/test
 out/**/*.map
-src/**
+src
+node_modules
 .gitignore
+.travis.yml
+build.yaml
 tsconfig.json
 vsc-extension-quickstart.md
 tslint.json
+webpack.config.js
