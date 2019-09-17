@@ -2,7 +2,7 @@
     "name": "jsonpath-extract",
     "displayName": "JSONPath Extraction",
     "description": "Use JSONPath to extract parts of your json document. Save often used json path queries.",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "publisher": "davidmarek",
     "license": "SEE LICENSE IN LICENSE",
     "homepage": "https://github.com/davidmarek/jsonpath-extract",
@@ -91,7 +91,7 @@
         }
     },
     "scripts": {
-        "vscode:prepublish": "webpack --mode production",
+        "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install",

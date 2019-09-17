@@ -3,7 +3,6 @@
 out/test
 out/**/*.map
 src
-node_modules
 .gitignore
 .travis.yml
 build.yaml
