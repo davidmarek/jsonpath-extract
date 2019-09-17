@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to the **JSONPath Extraction** extension will be documented in this file.
 
+## [1.2.1]
+### Fixed
+- Fix filenames for linux and other case sensitive OS
+
 ## [1.2.0]
 ### Added
 - Upgraded dependencies

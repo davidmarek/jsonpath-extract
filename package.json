@@ -2,7 +2,7 @@
     "name": "jsonpath-extract",
     "displayName": "JSONPath Extraction",
     "description": "Use JSONPath to extract parts of your json document. Save often used json path queries.",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "publisher": "davidmarek",
     "license": "SEE LICENSE IN LICENSE",
     "homepage": "https://github.com/davidmarek/jsonpath-extract",
