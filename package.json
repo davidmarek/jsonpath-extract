@@ -115,6 +115,6 @@
     "dependencies": {
         "@davidmarek/jsonpath": "^1.0.6",
         "@types/lodash": "^4.14.121",
-        "lodash": "^4.17.19"
+        "lodash": "^4.17.21"
     }
 }
