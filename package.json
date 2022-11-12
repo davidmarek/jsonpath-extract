@@ -110,7 +110,7 @@
         "typescript": "^3.3.3",
         "vscode": "^1.1.34",
         "webpack": "^4.40.2",
-        "webpack-cli": "^3.3.9"
+        "webpack-cli": "^3.3.12"
     },
     "dependencies": {
         "@davidmarek/jsonpath": "^1.0.6",
